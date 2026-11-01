@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Git Pull') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/giteshp2005-p/pipeline.git'
+            }
+        }
+       stage('Docker image') {
+           steps {
+               sh '''docker rm -f myweb2
+                    docker build -t giteshpatil/iacsd:latest .
+                     docker run --name myweb2 -d -p 9090:80 giteshpatil/iacsd:latest 
+                  '''
+                }
+                }
+           }
+       }
+    
